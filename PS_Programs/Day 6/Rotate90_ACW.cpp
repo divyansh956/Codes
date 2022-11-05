@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void rotate90cw(int nums[][100], int n)
+void rotate90acw(int nums[][100], int n)
 {
     for (int i = 0; i < n; i++)
     {
@@ -32,7 +32,7 @@ int main()
         }
     }
 
-    rotate90cw(nums, n);
+    rotate90acw(nums, n);
 
     for (int i = 0; i < n; i++)
     {
