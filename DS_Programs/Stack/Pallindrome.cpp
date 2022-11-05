@@ -3,12 +3,21 @@ using namespace std;
 
 string reverse(string ss, int n)
 {
-    int i = 0, j = n - 1;
-    while (i < j)
+    stack<char> s[n];
+    string ans;
+
+    int i = 0;
+    while (i < n)
     {
-        swap(ss[i++], ss[j--]);
+        s->push(ss[i++]);
     }
-    return ss;
+
+    while (!s->empty())
+    {
+        ans += s->top();
+        s->pop();
+    }
+    return ans;
 }
 
 int main()
