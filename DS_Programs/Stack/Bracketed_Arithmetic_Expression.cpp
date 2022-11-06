@@ -3,59 +3,59 @@ using namespace std;
 
 bool validParenthesis(string ss)
 {
-    stack<char> s[100];
-    int i = 0;
-    while (ss[i] != '\0')
-    {
-        if (ss[i] == '[' || ss[i] == '{' || ss[i] == '(')
-        {
-            s->push(ss[i]);
-        }
-        else
-        {
-            if (ss[i] == ']')
+   stack<char> s[100];
+   int i = 0;
+   while (ss[i] != '\0')
+   {
+      if (ss[i] == '[' || ss[i] == '{' || ss[i] == '(')
+      {
+         s->push(ss[i]);
+      }
+      else
+      {
+         if (s->empty() || (ss[i] == ']')
+         {
+            if (s->top() != '[')
             {
-                if (s->top() != '[')
-                {
-                    return false;
-                }
-                else
-                {
-                    s->pop();
-                }
+               return false;
             }
-            else if (ss[i] == '}')
+            else
             {
-                if (s->top() != '{')
-                {
-                    return false;
-                }
-                else
-                {
-                    s->pop();
-                }
+               s->pop();
             }
-            if (ss[i] == ')')
+         }
+         else if (s->empty() || ss[i] == '}')
+         {
+            if (s->top() != '{')
             {
-                if (s->top() != '(')
-                {
-                    return false;
-                }
-                else
-                {
-                    s->pop();
-                }
+               return false;
             }
-        }
-        i++;
-    }
-    return true;
+            else
+            {
+               s->pop();
+            }
+         }
+         if (ss[i] == ')')
+         {
+            if (s->empty() || s->top() != '(')
+            {
+               return false;
+            }
+            else
+            {
+               s->pop();
+            }
+         }
+      }
+      i++;
+   }
+   return true;
 }
 
 int main()
 {
-    string ss;
-    cin >> ss;
+   string ss;
+   cin >> ss;
 
-    cout << validParenthesis(ss) << endl;
+   cout << validParenthesis(ss) << endl;
 }
