@@ -1,65 +1,70 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool validsameParenthesis(string ss)
+int match(char x, char y)
 {
-    stack<char> s[100];
-    int i = 0;
-    while (ss[i] != '\0')
-    {
-        if (ss[i] == '[' || ss[i] == '{' || ss[i] == '(')
-        {
-            s->push(ss[i]);
-        }
-        else
-        {
-            if (ss[i] == ']')
-            {
-                if (!s->empty() && s->top() == '[')
-                {
-                    s->pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (ss[i] == '}')
-            {
-                if (!s->empty() && s->top() == '{')
-                {
-                    s->pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (ss[i] == ')')
-            {
-                if (!s->empty() && s->top() == '(')
-                {
-                    s->pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-        i++;
-    }
-    if (!s->empty())
-    {
-        return false;
-    }
-    return true;
+   if (x == '(' && y == ')')
+      return 1;
+   if (x == '{' && y == '}')
+      return 1;
+   if (x == '[' && y == ']')
+      return 1;
+   return 0;
 }
+void validityOfBracketed(string str)
+{
+   stack<char> s;
+   char x;
+   int i = 0, flag = 0;
+   while (i < str.length())
+   {
+      if (str[i] == '(' || str[i] == '{' || str[i] == '[')
+      {
+         s.push(str[i]);
+      }
+      else
+      {
+         if (s.empty())
+         {
+            flag = 1;
+            break;
+         }
+         else
+         {
+            if (match(s.top(), str[i]))
+            {
+               s.pop();
+            }
+            else
+            {
+               flag = 1;
+               break;
+            }
+         }
+      }
+      i++;
+   }
+   if (flag == 0)
+   {
+      if (!s.empty())
+      {
+         cout << "INVALID";
+      }
+      else
+      {
+         cout << "Valid";
+      }
+   }
+   else
+   {
+      cout << "Invalid";
+   }
+}
+
 
 int main()
 {
-    string ss;
-    cin >> ss;
-
-    cout << validsameParenthesis(ss) << endl;
+   string str;
+   cin >> str;
+   validityOfBracketed(str);
 }
