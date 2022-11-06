@@ -76,5 +76,5 @@ int main()
    s.pop();
    s.pop();
    s.pop();
-   cout << s.empty();
+   cout << s.empty() << endl;
 }
