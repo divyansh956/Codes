@@ -18,7 +18,7 @@ void Initialize()
 
 int isEmpty()
 {
-   if (q.rear == -1)
+   if (q.rear - q.front == -1)
    {
       return 1;
    }
@@ -67,6 +67,7 @@ int main()
    push(100);
    push(300);
    push(400);
+   pop();
    pop();
    x = front();
    printf("%d", x);
