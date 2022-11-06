@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void minimum(stack<int> s1, int n)
+void sortStack(stack<int> s1, int n)
 {
     stack<int> s2;
     s2.push(s1.top());
@@ -56,5 +56,5 @@ int main()
         cin >> x;
         s1.push(x);
     }
-    minimum(s1, n);
+    sortStack(s1, n);
 }
