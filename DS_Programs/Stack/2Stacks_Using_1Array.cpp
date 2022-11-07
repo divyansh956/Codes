@@ -19,7 +19,7 @@ public:
 
    void push1(int x)
    {
-      if (top2 == top1)
+      if (top2 - 1 == top1)
       {
          cout << "Stack Overflow"
               << " By element : " << x << endl;
@@ -34,7 +34,7 @@ public:
 
    void push2(int x)
    {
-      if (top2 == top1)
+      if (top2 - 1 == top1)
       {
          cout << "Stack Overflow"
               << " By element : " << x << endl;
