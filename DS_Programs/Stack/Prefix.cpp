@@ -100,6 +100,26 @@ int IsEmpty()
     else
         return 0;
 }
+void swap(char *a, char *b)
+{
+    char t;
+    t = *a;
+    *a = *b;
+    *b = t;
+}
+void reverse(char str[20])
+{
+    int i = 0, c = 0;
+    while (str[i] != '\0')
+    {
+        c++;
+        i++;
+    }
+    for (int j = 0; j < c / 2; j++)
+    {
+        swap(&str[j], &str[c - 1 - j]);
+    }
+}
 int evaluate(int a, int b, char op)
 {
     switch (op)
@@ -108,21 +128,21 @@ int evaluate(int a, int b, char op)
         return a + b;
         break;
     case '-':
-        return b - a;
+        return a - b;
         break;
     case '*':
         return a * b;
         break;
     case '/':
-        return b / a;
+        return a / b;
         break;
     case '^':
-        return pow(a, b);
+        return pow(b, a);
         break;
     }
 }
 int i = 0;
-void infix(char str[20])
+void prefix(char str[20])
 {
     while (str[i] != '\0')
     {
@@ -143,8 +163,9 @@ void infix(char str[20])
 
 int main()
 {
-    char str[13];
+    char str[20];
     gets(str);
+    reverse(str);
     Initialize();
-    infix(str);
+    prefix(str);
 }
