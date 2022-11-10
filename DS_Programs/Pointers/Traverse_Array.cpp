@@ -23,5 +23,9 @@ int main()
 
     int *ptr = &nums[0];
     traverse(ptr, n);
+
     // traverse(nums, n);
+
+    /* int *p = (int *)malloc(4);
+    printf("%d", *p); */
 }
