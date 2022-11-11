@@ -2,7 +2,7 @@
 #include <climits>
 using namespace std;
 
-void swap(int *a, int *b)
+void swaps(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
@@ -14,7 +14,7 @@ int main()
     int a, b;
     cin >> a >> b;
 
-    swap(&a, &b);
+    swaps(&a, &b);
 
     cout << a << " " << b << endl;
 
