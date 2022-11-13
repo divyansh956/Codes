@@ -9,13 +9,19 @@ void subsequence(int nums[], int i, int n, vector<int> &ans)
         {
             cout << x << " ";
         }
+
+        if (ans.size() == 0)
+        {
+            cout << "Null";
+        }
+
         cout << endl;
         return;
     }
 
     ans.push_back(nums[i]);
     subsequence(nums, i + 1, n, ans);
-    
+
     ans.pop_back();
     subsequence(nums, i + 1, n, ans);
 }
