@@ -12,15 +12,12 @@ int subsequence(int nums[], int i, int n, int sum, int k)
         return 0;
     }
 
-    ans.push_back(nums[i]);
     sum += nums[i];
-
     int l = subsequence(nums, i + 1, n, sum, k);
 
-    ans.pop_back();
     sum -= nums[i];
-
     int r = subsequence(nums, i + 1, n, sum, k);
+    
     return l + r;
 }
 
