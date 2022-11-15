@@ -1,11 +1,12 @@
+#include <stdlib.h>
 #include <stdio.h>
-#define STACKSIZE 10
+#define stacksize 30
 #define true 1
 #define false 0
 
 struct stack
 {
-    int item[STACKSIZE];
+    int item[stacksize];
     int top;
 };
 struct stack s;
@@ -15,55 +16,52 @@ void Initialize()
     s.top = -1;
 }
 
-int isEmpty()
+int IsEmpty()
 {
     if (s.top == -1)
     {
         return 1;
     }
-    return 0;
+    else
+        return 0;
 }
 
 void push(int x)
 {
-    if (s.top == STACKSIZE - 1)
+    if (s.top == (stacksize - 1))
     {
-        printf("Stack Overflow");
+        printf("Stack overflows");
+        return;
     }
-    s.top++;
+    s.top = s.top + 1;
     s.item[s.top] = x;
 }
 
 int pop()
 {
     int x;
-    if (isEmpty())
+    if (s.top == -1)
     {
-        printf("Stack Underflows");
+        printf("Stack underflows");
+        return 0;
     }
     x = s.item[s.top];
-    s.top--;
+    s.top = s.top - 1;
     return x;
 }
 
-int top()
-{
-    if (isEmpty())
-    {
-        printf("Stack Is Empty");
-    }
-    return s.item[s.top];
-}
 
 int main()
 {
     int x;
     Initialize();
-    push(100);
-    push(200);
-    push(300);
     push(400);
-    pop();
-    x = top();
-    printf("%d", x);
+    push(600);
+    push(987);
+    push(567);
+    x = pop();
+    printf("POPED element: %d\n", x);
+    x = pop();
+    printf("POPED element: %d", x);
+    printf("%d\n", IsEmpty());
 }
