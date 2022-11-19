@@ -1,91 +1,166 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <bits/stdc++.h>
+using namespace std;
 
-struct node
+class node
 {
-     int info;
-     struct node *next;
+public:
+    int data;
+    node *next;
+
+    node(int val)
+    {
+        data = val;
+        next = NULL;
+    }
 };
 
-struct node *start;
-
-struct node *GetNode()
+void insertAtHead(node *&head, int val)
 {
+    node *n = new node(val);
 
-     struct node *p;
-     p = start;
-     p = (struct node *)malloc(sizeof(struct node *));
-     return p;
+    n->next = head;
+    head = n;
 }
 
-void InsAft(struct node **q, int x)
+void insertAtTail(node *&head, int val)
 {
-     struct node *p, *r;
-     p = GetNode();
-     p->info = x;
-     r = (*q)->next;
-     p->next = r;
-     (*q)->next = p;
+    node *n = new node(val);
+
+    if (head == NULL)
+    {
+        head = n;
+        return;
+    }
+
+    node *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = n;
 }
 
-void InsEnd(struct node **start, int x)
+void insertAfter(node *&head, int val, int idx)
 {
-     struct node *q = *start;
-     while (q->next != NULL)
-     {
-          q = q->next;
-     }
-     struct node *p = GetNode();
-     p->info = x;
-     p->next = NULL;
-     q->next = p;
+    node *n = new node(val);
+
+    if (idx == 0)
+    {
+        insertAtHead(head, val);
+        return;
+    }
+
+    node *temp = head;
+
+    int i = 1;
+    for (i = 1; i < idx && temp->next != NULL; i++)
+    {
+        temp = temp->next;
+    }
+
+    if (idx == i - 1)
+    {
+        insertAtTail(head, val);
+        return;
+    }
+
+    if (idx != i)
+    {
+        cout << "Index " << idx << " Out of Range : Linked List Size = " << i << endl;
+        return;
+    }
+
+    n->next = temp->next;
+    temp->next = n;
 }
 
-void InsBeg(struct node **start, int x)
+void deleteAtHead(node *&head)
 {
-     struct node *p;
-     p = GetNode();
-     p->info = x;
-     p->next = *start;
-     *start = p;
+    node *todelete = head;
+
+    head = head->next;
+    delete todelete;
 }
 
-void traverse(struct node *start)
+void deleteVal(node *&head, int val)
 {
-     struct node *p;
-     p = start;
-     while (p != NULL)
-     {
-          printf("%d ", p->info);
-          p = p->next;
-     }
+    if (head == NULL)
+    {
+        cout << "Linked List Is Empty" << endl;
+        return;
+    }
+
+    if (head->data == val || head->next == NULL)
+    {
+        if (head->data != val)
+        {
+            cout << "Element: " << val << " Not Found" << endl;
+            return;
+        }
+
+        deleteAtHead(head);
+        return;
+    }
+
+    node *temp = head;
+
+    while (temp->next->data != val && temp->next->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    if (temp->next->next == NULL && temp->next->data != val)
+    {
+        cout << "Element: " << val << " Not Found" << endl;
+        return;
+    }
+
+    node *todelete = temp->next;
+    temp->next = temp->next->next;
+
+    delete todelete;
+}
+
+void display(node *head)
+{
+    if (head == NULL)
+    {
+        cout << "Linked List Is Empty" << endl;
+        return;
+    }
+
+    node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
 }
 
 int main()
 {
-     struct node *start = NULL;
-     InsBeg(&start, 100);
-     InsBeg(&start, 23);
-     InsBeg(&start, 300);
-     InsBeg(&start, 500);
-     InsBeg(&start, 97);
-     InsBeg(&start, 300);
-     InsEnd(&start, 1000);
+    node *head = NULL;
 
-     struct node *p = start;
-     printf("Enter Positon to be Inserted: ");
+    display(head);
 
-     int idx;
-     scanf("%d", &idx);
+    insertAtTail(head, 1);
+    insertAtTail(head, 2);
+    insertAtTail(head, 3);
+    insertAtHead(head, 4);
+    insertAtHead(head, 5);
+    display(head);
 
-     for (int i = 1; i < idx; i++)
-     {
-          p = p->next;
-     }
+    deleteVal(head, 3);
+    deleteVal(head, 78);
+    display(head);
 
-     InsEnd(&start, 39);
-     InsAft(&p, 40);
+    insertAtHead(head, 9);
+    insertAtTail(head, 6);
+    display(head);
 
-     printf("Linked List: ");
-     traverse(start);
+    insertAfter(head, 10, 5);
+    insertAfter(head, 15, 9);
+    insertAtTail(head, 11);
+    display(head);
 }
