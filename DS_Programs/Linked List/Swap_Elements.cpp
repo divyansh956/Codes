@@ -1,3 +1,5 @@
+// Using 1 Based Indexing
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -128,49 +130,20 @@ void Swap(node *&head, int idx1, int idx2)
     node *temp1 = head;
     node *temp2 = head;
 
-    for (int i = 1; i < idx1 - 1; i++)
+    for (int i = 1; i < idx1; i++)
     {
         temp1 = temp1->next;
     }
-    val1 = temp1->next->data;
+    val1 = temp1->data;
 
-    for (int i = 1; i < idx2 - 1; i++)
+    for (int i = 1; i < idx2; i++)
     {
         temp2 = temp2->next;
     }
-    val2 = temp2->next->data;
+    val2 = temp2->data;
 
-    node *n1 = new node(val1);
-    node *n2 = new node(val2);
-
-    if (idx1 + 1 == idx2)
-    {
-        temp1->next = n2;
-        n2->next = n1;
-
-        node *todelete = temp2->next;
-        n1->next = temp2->next->next;
-
-        delete todelete;
-        return;
-    }
-
-    if (idx2 + 1 == idx1)
-    {
-        temp2->next = n1;
-        n1->next = n2;
-
-        node *todelete = temp1->next;
-        n2->next = temp1->next->next;
-
-        delete todelete;
-        return;
-    }
-
-    n2->next = temp1->next->next;
-    temp1->next = n2;
-    n1->next = temp2->next->next;
-    temp2->next = n1;
+    temp1->data = val2;
+    temp2->data = val1;
 }
 
 void display(node *head)
@@ -207,7 +180,6 @@ int main()
     insertAtTail(head, 11);
     display(head);
 
-    Swap(head, 3, 2);
-    Swap(head, 4, 5);
+    Swap(head, 8, 7);
     display(head);
 }
