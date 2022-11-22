@@ -133,7 +133,15 @@ void middleElement(node *head)
         temp1 = temp1->next;
         temp2 = temp2->next->next;
     }
-    cout << "Middle Element: " << temp1->data << endl;
+
+    if (temp2 == NULL)
+    {
+        cout << "Middle Element: " << temp1->data << endl;
+    }
+    else
+    {
+        cout << "Middle Elements: " << temp1->data << " " << temp1->next->data << endl;
+    }
 }
 
 void display(node *head)
