@@ -121,6 +121,24 @@ void deleteVal(node *&head, int val)
     delete todelete;
 }
 
+int Count(node *head)
+{
+    if (head == NULL)
+    {
+        return 0;
+    }
+
+    node *temp = head;
+    int i = 0;
+
+    while (temp != NULL)
+    {
+        i++;
+        temp = temp->next;
+    }
+    return i;
+}
+
 void display(node *head)
 {
     if (head == NULL)
@@ -163,4 +181,6 @@ int main()
     insertAfter(head, 15, 9);
     insertAtTail(head, 11);
     display(head);
+    
+    cout << Count(head) << endl;
 }
