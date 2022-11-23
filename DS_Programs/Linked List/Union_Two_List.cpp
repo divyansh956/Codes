@@ -156,7 +156,7 @@ void display(node *head)
     cout << endl;
 }
 
-void mergeList(node *&head3, node *head1, node *head2)
+void union(node *&head3, node *head1, node *head2)
 {
     while (head1 != NULL && head2 != NULL)
     {
@@ -214,5 +214,5 @@ int main()
     display(head1);
     display(head2);
 
-    mergeList(head3, head1, head2);
+    union(head3, head1, head2);
 }
