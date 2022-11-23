@@ -139,6 +139,27 @@ int Count(node *head)
     return i;
 }
 
+void ascending(node *&head, int val)
+{
+    node *temp = head;
+    int i = 0;
+
+    while (temp != NULL && temp->data <= val)
+    {
+        i++;
+        temp = temp->next;
+    }
+
+    if (temp == head)
+    {
+        insertAtHead(head, val);
+    }
+    else
+    {
+        insertAfter(head, val, i);
+    }
+}
+
 void display(node *head)
 {
     if (head == NULL)
@@ -148,6 +169,7 @@ void display(node *head)
     }
 
     node *temp = head;
+    cout << "Linked List: ";
     while (temp != NULL)
     {
         cout << temp->data << " ";
@@ -192,16 +214,17 @@ int main()
     node *head2 = NULL;
     node *head3 = NULL;
 
-    insertAtTail(head1, 1);
-    insertAtTail(head2, 2);
-    insertAtTail(head1, 3);
-    insertAtTail(head2, 4);
-    insertAtTail(head1, 5);
-    insertAtTail(head1, 9);
-    insertAtTail(head1, 15);
-    insertAtTail(head2, 20);
-    insertAtTail(head2, 87);
-    insertAtTail(head1, 22);
+    ascending(head1, 3);
+    ascending(head2, 2);
+    ascending(head1, 1);
+    ascending(head2, 4);
+    ascending(head1, 8);
+    ascending(head1, 5);
+    ascending(head1, 15);
+    ascending(head2, 20);
+    ascending(head2, 7);
+    ascending(head1, 22);
+    
     display(head1);
     display(head2);
 
