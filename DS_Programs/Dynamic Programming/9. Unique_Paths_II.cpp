@@ -67,7 +67,7 @@ using namespace std;
 
 int mod = (int)(1e9 + 7);
 
-int paths(int r, int c, vector<vector<int>> &mat, vector<vector<int>> dp)
+int paths(int r, int c, vector<vector<int>> &mat, vector<vector<int>> &dp)
 {
     if (r >= 0 && c >= 0 && mat[r][c] == -1)
     {
