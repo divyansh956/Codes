@@ -184,10 +184,8 @@ int minimumPathSum(vector<vector<int>> &triangle, int n)
 
     for (int i = n - 2; i >= 0; i--)
     {
-
         for (int j = i; j >= 0; j--)
         {
-
             int down = triangle[i][j] + prevRow[j];
 
             int diag = triangle[i][j] + prevRow[j + 1];
