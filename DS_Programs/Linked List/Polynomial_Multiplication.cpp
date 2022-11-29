@@ -208,14 +208,14 @@ int main()
     node *head3 = NULL;
 
     insertAtTail(head1, 4, 3);
-    insertAtTail(head1, -2, 2);
     insertAtTail(head1, 8, 1);
+    insertAtTail(head1, -2, 2);
     insertAtTail(head1, -9, 0);
     display(head1);
 
+    insertAtTail(head2, 5, 1);
     insertAtTail(head2, 2, 3);
     insertAtTail(head2, 5, 2);
-    insertAtTail(head2, 5, 1);
     insertAtTail(head2, 2, 0);
     display(head2);
 
