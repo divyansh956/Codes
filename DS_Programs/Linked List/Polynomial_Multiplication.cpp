@@ -217,7 +217,6 @@ int main()
     insertAtTail(head2, 5, 2);
     insertAtTail(head2, 5, 1);
     insertAtTail(head2, 2, 0);
-    // insertAtTail(head2, 2, 0);
     display(head2);
 
     polynomialMultiplication(head3, head1, head2);
