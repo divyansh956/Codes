@@ -147,6 +147,7 @@ void display(node *head)
         return;
     }
 
+    cout << "Linked List: ";
     node *temp = head;
     while (temp != NULL)
     {
@@ -181,6 +182,6 @@ int main()
     insertAfter(head, 15, 9);
     insertAtTail(head, 11);
     display(head);
-    
+
     cout << Count(head) << endl;
 }
