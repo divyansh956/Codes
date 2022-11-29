@@ -84,7 +84,7 @@ void polynomialSubtraction(node *head3, node *head1, node *head2)
     {
         if (head1->exp == head2->exp)
         {
-            insertAtTail(head3, head1->coef + head2->coef*-1, head1->exp);
+            insertAtTail(head3, head1->coef + head2->coef * -1, head1->exp);
             head1 = head1->next;
             head2 = head2->next;
         }
@@ -95,7 +95,7 @@ void polynomialSubtraction(node *head3, node *head1, node *head2)
         }
         else
         {
-            insertAtTail(head3, head2->coef*-1, head2->exp);
+            insertAtTail(head3, head2->coef * -1, head2->exp);
             head2 = head2->next;
         }
     }
@@ -108,7 +108,7 @@ void polynomialSubtraction(node *head3, node *head1, node *head2)
 
     while (head2 != NULL)
     {
-        insertAtTail(head3, head2->coef, head2->exp);
+        insertAtTail(head3, head2->coef * -1, head2->exp);
         head2 = head2->next;
     }
 
