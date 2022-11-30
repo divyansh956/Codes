@@ -183,9 +183,16 @@ string addNumber(node *&head3, node *head1, node *head2)
 
     while (head1 != NULL && head2 != NULL)
     {
+        int mx = max(head1->data, head1->data);
+        int mxlen = to_string(mx).length();
+
         int total = head1->data + head2->data + carry;
+        int len1 = to_string(total).length();
+
+        int cnt = (len1 > mxlen) && (head1->next != NULL || head2->next !=NULL);
+
         int digit = (to_string(total)).length();
-        int temp = pow(10, digit - 1);
+        int temp = pow(10, digit - cnt);
         int sum = total % temp;
         carry = total / temp;
 
