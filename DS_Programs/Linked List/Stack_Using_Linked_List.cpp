@@ -19,6 +19,15 @@ void Initialize(node *head)
     head = NULL;
 }
 
+int IsEmpty(node *head)
+{
+    if (head == NULL)
+    {
+        return 1;
+    }
+    return 0;
+}
+
 void push(node *&head, int val)
 {
     node *n = new node(val);
@@ -29,6 +38,12 @@ void push(node *&head, int val)
 
 void pop(node *&head)
 {
+    if (IsEmpty(head))
+    {
+        cout << "Stack Underflow" << endl;
+        return;
+    }
+    
     node *todelete = head;
 
     head = head->next;
@@ -38,15 +53,6 @@ void pop(node *&head)
 int top(node *&head)
 {
     return head->data;
-}
-
-int IsEmpty(node *head)
-{
-    if (head == NULL)
-    {
-        return 1;
-    }
-    return 0;
 }
 
 int main()
