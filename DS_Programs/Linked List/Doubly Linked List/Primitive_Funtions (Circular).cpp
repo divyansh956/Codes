@@ -146,21 +146,25 @@ void deleteAtTail(node *&head, node *&prev)
 
 void deleteBefore(node *&head, node *&prev, node *p)
 {
-    if (p == NULL || p->prev == NULL)
+    if (p == NULL)
     {
         cout << "Void Deletion" << endl;
         return;
     }
 
-    if (p->prev->prev == NULL)
+    if (p->next == p && p->prev == p)
     {
-        node *todelete = head;
-
-        p->prev = NULL;
-        head = head->next;
-
+        node *todelete = p;
         delete todelete;
 
+        head = NULL;
+
+        return;
+    }
+
+    if (p->prev == head)
+    {
+        deleteAtHead(head, prev);
         return;
     }
 
@@ -188,6 +192,12 @@ void deleteAfter(node *&head, node *&prev, node *p)
 
         head = NULL;
 
+        return;
+    }
+
+    if (p->next == head)
+    {
+        deleteAtHead(head, prev);
         return;
     }
 
@@ -226,13 +236,12 @@ int main()
     node *head = NULL;
     node *prev = NULL;
 
-    insertAfter(head, prev, NULL, 11);
-    insertAfter(head, prev, head, 12);
-    insertAfter(head, prev, head->next, 15);
-    display(head);
-
-    deleteAfter(head, prev, head->prev);
-    deleteAfter(head, prev, head);
-    deleteAfter(head, prev, head);
+    insertAtTail(head, prev, 1);
+    insertAtTail(head, prev, 2);
+    insertAtTail(head, prev, 3);
+    insertAtTail(head, prev, 4);
+    insertAtTail(head, prev, 5);
+    insertAtTail(head, prev, 6);
+    
     display(head);
 }
