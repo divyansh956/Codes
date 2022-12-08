@@ -129,7 +129,7 @@ void deleteAfter(node *&root, node *&head, node *&q)
 
     if (q->next == NULL)
     {
-        deleteAtTail(root, head);
+        cout << "Void Deletion" << endl;
         return;
     }
 
@@ -166,8 +166,7 @@ int main()
 
     insertAtHead(root, head, 1);
     insertAtHead(root, head, 3);
-    insertAtHead(root, head, 4);
-    insertAfter(root, head, head->next->next, 2);
+
     display(root, head);
 
     deleteAfter(root, head, head->next);
