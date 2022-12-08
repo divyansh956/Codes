@@ -17,46 +17,13 @@ public:
 void insertAtHead(node *&head, int val)
 {
     node *n = new node(val);
-
+    
     n->next = head;
     head = n;
 }
 
-void insertAtTail(node *&head, int val)
-{
-    node *n = new node(val);
-
-    if (head == NULL)
-    {
-        head = n;
-        return;
-    }
-
-    node *temp = head;
-    while (temp->next != NULL)
-    {
-        temp = temp->next;
-    }
-    temp->next = n;
-}
-
-void deleteAtHead(node *&head)
-{
-    node *todelete = head;
-
-    head = head->next;
-    delete todelete;
-}
-
 void display(node *head)
 {
-    if (head == NULL)
-    {
-        cout << "Linked List Is Empty" << endl;
-        return;
-    }
-
-    cout << "Linked List: ";
     node *temp = head;
     while (temp != NULL)
     {
