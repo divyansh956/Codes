@@ -24,8 +24,8 @@ void PostOrder(node *root)
     }
 
     PostOrder(root->left);
-    cout << root->data << " ";
     PostOrder(root->right);
+    cout << root->data << " ";
 }
 
 int main()
