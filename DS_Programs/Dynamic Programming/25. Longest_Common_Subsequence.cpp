@@ -148,7 +148,7 @@ int lcs(string s1, string s2)
     int n1 = s1.length();
     int n2 = s2.length();
 
-    vector<int> prev(n2 + 1, -1);
+    vector<int> prev(n2 + 1, 0);
     for (int ind2 = 0; ind2 <= n2; ind2++)
     {
         prev[ind2] = 0;
@@ -156,7 +156,7 @@ int lcs(string s1, string s2)
 
     for (int ind1 = 1; ind1 <= n1; ind1++)
     {
-        vector<int> curr(n2 + 1, -1);
+        vector<int> curr(n2 + 1, 0);
 
         for (int ind2 = 1; ind2 <= n2; ind2++)
         {
