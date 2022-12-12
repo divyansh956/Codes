@@ -16,7 +16,7 @@ public:
     }
 };
 
-int count_N2_Nodes(node *root)
+int count_N1_Nodes(node *root)
 {
     if (root == NULL)
     {
@@ -30,10 +30,10 @@ int count_N2_Nodes(node *root)
 
     if (root->left != NULL && root->right != NULL)
     {
-        return count_N2_Nodes(root->left) + count_N2_Nodes(root->right);
+        return count_N1_Nodes(root->left) + count_N1_Nodes(root->right);
     }
 
-    return count_N2_Nodes(root->left) + count_N2_Nodes(root->right) + 1;
+    return count_N1_Nodes(root->left) + count_N1_Nodes(root->right) + 1;
 }
 
 int main()
@@ -46,5 +46,5 @@ int main()
     root->right->left = new node(6);
     root->right->right = new node(7);
 
-    cout << count_N2_Nodes(root) << endl;
+    cout << count_N1_Nodes(root) << endl;
 }
