@@ -18,6 +18,30 @@ public:
     }
 };
 
+void PostOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    PostOrder(root->left);
+    PostOrder(root->right);
+    cout << root->data << " ";
+}
+
+void preOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    cout << root->data << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
 void InOrder(node *root)
 {
     if (root == NULL)
@@ -28,18 +52,6 @@ void InOrder(node *root)
     InOrder(root->left);
     cout << root->data << " ";
     InOrder(root->right);
-}
-
-int search(string inOrder, int start, int end, int curr)
-{
-    for (int i = start; i <= end; i++)
-    {
-        if (curr == (inOrder[i] - '0'))
-        {
-            return i;
-        }
-    }
-    return -1;
 }
 
 void levelOrder(node *root)
@@ -85,28 +97,19 @@ int rheight(node *root)
     {
         return 0;
     }
-
-    int hl = 0, hr = 0;
-
-    if (root->left == NULL)
-    {
-        hl = 0;
-    }
     else
     {
-        hl = 1 + root->left->height;
+        if (root->left == NULL && root->right == NULL)
+        {
+            return 0;
+        }
+        else
+        {
+            int l = rheight(root->left);
+            int r = rheight(root->right);
+            return max(l, r) + 1;
+        }
     }
-
-    if (root->right == NULL)
-    {
-        hr = 0;
-    }
-    else
-    {
-        hr = 1 + root->right->height;
-    }
-
-    return max(hl, hr);
 }
 
 int BalanceFactor(node *root)
@@ -227,7 +230,7 @@ node *AVLinsert(node *&root, int val)
 
         if (BalanceFactor(root) == -2)
         {
-            if (val > root->right->data)
+            if (val < root->right->data)
             {
                 root = RR(root);
             }
@@ -250,8 +253,6 @@ node *makeAVLtree(int nums[], int n)
     for (int i = 0; i < n; i++)
     {
         AVLinsert(root, nums[i]);
-        InOrder(root);
-        cout << endl;
     }
 
     return root;
@@ -268,5 +269,12 @@ int main()
         cin >> nums[i];
     }
 
-    node *rot = makeAVLtree(nums, n);
+    node *root = makeAVLtree(nums, n);
+    preOrder(root);
+    cout << endl;
+    InOrder(root);
+    cout << endl;
+    PostOrder(root);
+    cout << endl;
+    levelOrder(root);
 }
