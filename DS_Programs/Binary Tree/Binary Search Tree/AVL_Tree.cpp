@@ -230,7 +230,7 @@ node *AVLinsert(node *&root, int val)
 
         if (BalanceFactor(root) == -2)
         {
-            if (val < root->right->data)
+            if (val >= root->right->data)
             {
                 root = RR(root);
             }
