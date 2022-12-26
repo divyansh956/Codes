@@ -52,16 +52,18 @@ void InOrder(node *root)
     InOrder(root->right);
 }
 
-node *copytree(node *t, node *root)
+node *copytree(node *root)
 {
     if (root == NULL)
     {
         return NULL;
     }
 
+    node *t = NULL;
+
     t = root;
-    t->left = copytree(t, root->left);
-    t->right = copytree(t, root->right);
+    t->left = copytree(root->left);
+    t->right = copytree(root->right);
 
     return t;
 }
@@ -78,6 +80,7 @@ int main()
     InOrder(root);
     cout << endl;
 
-    node *t = copytree(NULL, root);
+    node *t = copytree(root);
     InOrder(t);
+    cout << endl;
 }
