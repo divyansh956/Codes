@@ -20,6 +20,79 @@ public:
     }
 };
 
+void PostOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    PostOrder(root->left);
+    PostOrder(root->right);
+    cout << root->freq << " ";
+}
+
+void preOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    cout << root->freq << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+void InOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    InOrder(root->left);
+    cout << root->freq << " ";
+    InOrder(root->right);
+}
+
+void levelOrder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    queue<node *> q;
+    q.push(root);
+    q.push(NULL);
+
+    while (!q.empty())
+    {
+        node *p = q.front();
+        q.pop();
+
+        if (p != NULL)
+        {
+            cout << p->freq << " ";
+
+            if (p->left != NULL)
+            {
+                q.push(p->left);
+            }
+
+            if (p->right != NULL)
+            {
+                q.push(p->right);
+            }
+        }
+        else if (!q.empty())
+        {
+            q.push(NULL);
+        }
+    }
+}
+
 void PQInsert(node *&root, node *x)
 {
     node *p = root;
@@ -99,5 +172,16 @@ int main()
     }
 
     node *root = HuffmanTree(sym, freq, n);
+
+    preOrder(root);
+    cout << endl;
+
+    InOrder(root);
+    cout << endl;
+
+    PostOrder(root);
+    cout << endl;
+
     levelOrder(root);
+    cout << endl;
 }
