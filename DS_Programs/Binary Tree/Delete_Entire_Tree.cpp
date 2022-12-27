@@ -56,14 +56,17 @@ node *deleteTree(node *&root)
 {
     if (root == NULL)
     {
-        delete root;
         return NULL;
     }
 
     root->left = deleteTree(root->left);
     root->right = deleteTree(root->right);
-    root = NULL;
-    delete root;
+
+    if (root->left == NULL && root->right == NULL)
+    {
+        delete root;
+        return NULL;
+    }
 
     return root;
 }
