@@ -37,11 +37,11 @@ int countsumK(node *root, int k, int sum)
         return 0;
     }
 
-    int take = countsumK(root->left, k, sum + root->data);
+    int left = countsumK(root->left, k, sum + root->data);
 
-    int notTake = countsumK(root->right, k, sum + root->data);
+    int right = countsumK(root->right, k, sum + root->data);
 
-    return take + notTake;
+    return left + right;
 }
 
 int main()
