@@ -8,9 +8,9 @@ void DFSVisit(int i, vector<int> &visited, vector<int> &predcessor, vector<int> 
 
     for (int j = 0; j < AdjList[i].size(); j++)
     {
-        if (visited[i] == 0)
+        if (visited[AdjList[i][j]] == 0)
         {
-            DFSVisit(j, visited, predcessor, AdjList);
+            DFSVisit(AdjList[i][j], visited, predcessor, AdjList);
             predcessor[AdjList[i][j]] = i;
         }
     }
@@ -62,17 +62,3 @@ int main()
 
     DFS(AdjList, v);
 }
-
-Adjance List:
-0: 1 5 
-1: 2 
-2: 4 
-3: 2 6 
-4: 
-5: 4 
-6: 4 7 
-7: 5 
-8: 6 9 
-9: 7 
-
-0 1 2 3 4 5 6 7 8 9
