@@ -87,6 +87,7 @@ void levelOrder(node *root)
         else if (!q.empty())
         {
             q.push(NULL);
+            //   cout << endl;
         }
     }
 }
@@ -198,119 +199,85 @@ node *RL(node *x)
     return t;
 }
 
-node *deleteNode(node *&root, int val)
+node *minimum(node *root)
 {
-    node *prev = NULL;
-    node *curr = root;
-
-    while (curr != NULL && curr->data != val)
+    while (root->left != NULL)
     {
-        prev = curr;
-        if (val < curr->data)
-        {
-            curr = curr->left;
-        }
-        else
-        {
-            curr = curr->right;
-        }
+        root = root->left;
     }
-
-    if (curr == NULL)
-    {
-        return root;
-    }
-
-    if (curr->left == NULL || curr->right == NULL)
-    {
-        node *newtree;
-
-        if (curr->left == NULL)
-        {
-            newtree = curr->right;
-        }
-        else
-        {
-            newtree = curr->left;
-        }
-
-        if (prev == NULL)
-        {
-            return newtree;
-        }
-
-        if (curr == prev->left)
-        {
-            prev->left = newtree;
-        }
-        else
-        {
-            prev->right = newtree;
-        }
-
-        delete curr;
-    }
-    else
-    {
-        node *prev = NULL;
-        node *t;
-
-        t = curr->right;
-        while (t->left != NULL)
-        {
-            prev = t;
-            t = t->left;
-        }
-
-        if (prev != NULL)
-        {
-            prev->left = t->right;
-        }
-        else
-        {
-            curr->right = t->right;
-        }
-        curr->data = t->data;
-
-        delete t;
-    }
-
     return root;
 }
 
 node *AVLdelete(node *&root, int val)
 {
-    root = deleteNode(root, val);
-
     if (root == NULL)
     {
-        return NULL;
+        return root;
     }
 
-    root->height = rheight(root);
-
-    if (BalanceFactor(root) == 2)
+    if (root->data > val)
     {
-        if (BalanceFactor(root->left) >= 0)
-        {
-            root = LL(root);
-        }
-        else
-        {
-            root = LR(root);
-        }
+        root->left = AVLdelete(root->left, val);
+    }
+    else if (root->data < val)
+    {
+        root->right = AVLdelete(root->right, val);
     }
     else
     {
-        if (BalanceFactor(root) == -2)
+        if (root->left == NULL && root->right == NULL)
         {
-            if (BalanceFactor(root->left) <= 0)
+            root = NULL;
+        }
+        else if (root->left == NULL || root->right == NULL)
+        {
+            node *t;
+            if (root->left != NULL)
             {
-                root = RR(root);
+                t = root->left;
             }
             else
             {
-                root = RL(root);
+                t = root->right;
+            }
+            root->data = t->data;
+            delete t;
+        }
+        else
+        {
+            node *t = minimum(root->right);
+            root->data = t->data;
+            root->right = AVLdelete(root->right, t->data);
+        }
+    }
+
+    if (root != NULL)
+    {
+        root->height = rheight(root);
+
+        if (BalanceFactor(root) == 2)
+        {
+            if (BalanceFactor(root->left) >= 0)
+            {
+                root = LL(root);
+            }
+            else
+            {
+                root = LR(root);
+            }
+        }
+        else
+        {
+            if (BalanceFactor(root) == -2)
+            {
+                if (BalanceFactor(root->left) <= 0)
+                {
+                    root = RR(root);
+                }
+                else
+                {
+                    root = RL(root);
+                }
             }
         }
     }
@@ -393,8 +360,10 @@ int main()
     levelOrder(root);
     cout << endl;
 
-    AVLdelete(root, 10);
-    
+    AVLdelete(root, 11);
+    AVLdelete(root, 15);
+    AVLdelete(root, 66);
+
     levelOrder(root);
     cout << endl;
 
