@@ -9,7 +9,7 @@ public:
     double avgTurnAroundTime = 0, avgwaitingTime = 0, avgresponseTime = 0;
 };
 
-bool cmp(const FSFC &o1, const FSFC &o2)
+bool cmp1(const FSFC &o1, const FSFC &o2)
 {
     if (o1.arrivalTime == o2.arrivalTime)
     {
@@ -38,14 +38,17 @@ int main()
         cin >> process[i].burstTime;
     }
 
-    sort(process.begin(), process.end(), cmp);
+    sort(process.begin(), process.end(), cmp1);
 
     for (int i = 0; i < n; i++)
     {
         process[i].responseTime = curr - process[i].arrivalTime;
         process[i].currentTime = curr + process[i].burstTime;
 
-        curr = process[i].currentTime;
+        if (i < n - 1)
+        {
+            curr = max(process[i].currentTime, process[i + 1].arrivalTime);
+        }
 
         process[i].turnAroundTime = process[i].currentTime - process[i].arrivalTime;
         process[i].waitingTime = process[i].turnAroundTime - process[i].burstTime;
