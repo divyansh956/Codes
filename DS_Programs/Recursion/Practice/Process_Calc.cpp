@@ -9,7 +9,7 @@ public:
     double avgTurnAroundTime = 0, avgwaitingTime = 0, avgresponseTime = 0;
 };
 
-bool cmp1(const FSFC &o1, const FSFC &o2)
+bool cmp(const FSFC &o1, const FSFC &o2)
 {
     if (o1.arrivalTime == o2.arrivalTime)
     {
@@ -38,7 +38,7 @@ int main()
         cin >> process[i].burstTime;
     }
 
-    sort(process.begin(), process.end(), cmp1);
+    sort(process.begin(), process.end(), cmp);
 
     for (int i = 0; i < n; i++)
     {
