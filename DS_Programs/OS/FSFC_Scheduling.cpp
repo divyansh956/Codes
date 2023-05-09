@@ -7,7 +7,7 @@ class FSFC
 {
 public:
     string name;
-    int currentTime, arrivalTime, burstTime, turnAroundTime, responseTime, waitingTime;
+    int completionTime, arrivalTime, burstTime, turnAroundTime, responseTime, waitingTime;
 };
 
 bool cmp(const FSFC &o1, const FSFC &o2)
@@ -43,14 +43,14 @@ int main()
     for (int i = 0; i < n; i++)
     {
         process[i].responseTime = curr - process[i].arrivalTime;
-        process[i].currentTime = curr + process[i].burstTime;
+        process[i].completionTime = curr + process[i].burstTime;
 
         if (i < n - 1)
         {
-            curr = max(process[i].currentTime, process[i + 1].arrivalTime);
+            curr = max(process[i].completionTime, process[i + 1].arrivalTime);
         }
 
-        process[i].turnAroundTime = process[i].currentTime - process[i].arrivalTime;
+        process[i].turnAroundTime = process[i].completionTime - process[i].arrivalTime;
         process[i].waitingTime = process[i].turnAroundTime - process[i].burstTime;
 
         avgTurnAroundTime += process[i].turnAroundTime;
@@ -62,7 +62,7 @@ int main()
     for (int i = 0; i < n; i++)
     {
         cout << process[i].name << ":  ";
-        cout << process[i].arrivalTime << "\t" << process[i].burstTime << "\t" << process[i].currentTime << "\t" << process[i].turnAroundTime << "\t" << process[i].waitingTime << "\t" << process[i].responseTime;
+        cout << process[i].arrivalTime << "\t" << process[i].burstTime << "\t" << process[i].completionTime << "\t" << process[i].turnAroundTime << "\t" << process[i].waitingTime << "\t" << process[i].responseTime;
         cout << endl;
     }
 
@@ -76,8 +76,8 @@ int main()
     cout << process[0].arrivalTime << "  |" << process[0].name << "|  ";
     for (int i = 0; i < n - 1; i++)
     {
-        cout << process[i].currentTime << "  |" << process[i + 1].name << "|  ";
+        cout << process[i].completionTime << "  |" << process[i + 1].name << "|  ";
     }
-    cout << process[n - 1].currentTime;
+    cout << process[n - 1].completionTime;
     cout << endl;
 }
