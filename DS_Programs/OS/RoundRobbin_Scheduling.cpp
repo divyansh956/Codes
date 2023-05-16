@@ -10,6 +10,11 @@ public:
     int completionTime, arrivalTime, burstTime, turnAroundTime, responseTime, waitingTime, remburstTime;
 };
 
+bool cmp(const roundRobbin &o1, const roundRobbin &o2)
+{
+    return o1.arrivalTime < o2.arrivalTime;
+}
+
 int main()
 {
     int n, TQ;
@@ -31,6 +36,8 @@ int main()
         process[i].remburstTime = process[i].burstTime;
     }
 
+    sort(process.begin(), process.end(), cmp);
+
     int i = 0;
     while (i < n && curr == process[i].arrivalTime)
     {
@@ -43,19 +50,23 @@ int main()
     {
         roundRobbin x = q.front();
         q.pop();
-        int p = x.name[1] - '0' - 1;
 
         while (i < n && curr + TQ >= process[i].arrivalTime)
         {
             q.push(process[i]);
             i++;
+
+            if (i == n)
+            {
+                process.clear();
+            }
         }
 
-        cout << process[p].name << "|  ";
+        cout << x.name << "|  ";
 
         if (x.remburstTime == x.burstTime)
         {
-            process[p].responseTime = curr - process[p].arrivalTime;
+            x.responseTime = curr - x.arrivalTime;
         }
 
         if (x.remburstTime > TQ)
@@ -70,13 +81,15 @@ int main()
             curr += x.remburstTime;
             cout << curr << "  |";
             x.remburstTime = 0;
-            process[p].completionTime = curr;
-            process[p].turnAroundTime = process[p].completionTime - process[p].arrivalTime;
-            process[p].waitingTime = process[p].turnAroundTime - process[p].burstTime;
+            x.completionTime = curr;
+            x.turnAroundTime = x.completionTime - x.arrivalTime;
+            x.waitingTime = x.turnAroundTime - x.burstTime;
 
-            avgTurnAroundTime += process[p].turnAroundTime;
-            avgresponseTime += process[p].responseTime;
-            avgwaitingTime += process[p].waitingTime;
+            avgTurnAroundTime += x.turnAroundTime;
+            avgresponseTime += x.responseTime;
+            avgwaitingTime += x.waitingTime;
+
+            process.push_back(x);
         }
     }
     cout << endl;
