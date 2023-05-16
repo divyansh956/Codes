@@ -45,7 +45,7 @@ int main()
         i++;
     }
 
-    cout << "|  " << curr << "  |";
+    cout << curr;
     while (!q.empty())
     {
         roundRobbin x = q.front();
@@ -57,7 +57,7 @@ int main()
             i++;
         }
 
-        cout << x.name << "|  ";
+        cout << "  |" << x.name << "|  ";
 
         if (x.remburstTime == x.burstTime)
         {
@@ -67,14 +67,14 @@ int main()
         if (x.remburstTime > TQ)
         {
             curr += TQ;
-            cout << curr << "  |";
+            cout << curr;
             x.remburstTime -= TQ;
             q.push(x);
         }
         else
         {
             curr += x.remburstTime;
-            cout << curr << "  |";
+            cout << curr;
             x.remburstTime = 0;
             x.completionTime = curr;
             x.turnAroundTime = x.completionTime - x.arrivalTime;
