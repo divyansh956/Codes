@@ -12,10 +12,6 @@ public:
 
 bool cmp(const FSFC &o1, const FSFC &o2)
 {
-    if (o1.arrivalTime == o2.arrivalTime)
-    {
-        return o1.burstTime < o2.burstTime;
-    }
     return o1.arrivalTime < o2.arrivalTime;
 }
 
