@@ -67,15 +67,14 @@ int main()
         if (x.remburstTime > TQ)
         {
             curr += TQ;
-            cout << curr;
             x.remburstTime -= TQ;
             q.push(x);
         }
         else
         {
             curr += x.remburstTime;
-            cout << curr;
             x.remburstTime = 0;
+            
             x.completionTime = curr;
             x.turnAroundTime = x.completionTime - x.arrivalTime;
             x.waitingTime = x.turnAroundTime - x.burstTime;
@@ -87,6 +86,7 @@ int main()
             int p = stoi(x.name.substr(1)) - 1;
             process[p] = x;
         }
+        cout << curr;
     }
     cout << endl;
     cout << endl;
