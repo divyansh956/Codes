@@ -10,16 +10,7 @@ public:
     int completionTime, arrivalTime, burstTime, turnAroundTime, responseTime, waitingTime;
 };
 
-bool cmp1(const SJF &o1, const SJF &o2)
-{
-    if (o1.arrivalTime == o2.arrivalTime)
-    {
-        return o1.burstTime < o2.burstTime;
-    }
-    return o1.arrivalTime < o2.arrivalTime;
-}
-
-bool cmp2(const SJF &o1, const SJF &o2)
+bool cmp(const SJF &o1, const SJF &o2)
 {
     if (curr >= o2.arrivalTime && curr >= o1.arrivalTime)
     {
@@ -47,7 +38,7 @@ int main()
         cin >> process[i].burstTime;
     }
 
-    sort(process.begin(), process.end(), cmp1);
+    sort(process.begin(), process.end(), cmp);
 
     for (int i = 0; i < n; i++)
     {
@@ -66,7 +57,7 @@ int main()
         avgresponseTime += process[i].responseTime;
         avgwaitingTime += process[i].waitingTime;
 
-        sort(process.begin() + i + 1, process.end(), cmp2);
+        sort(process.begin() + i + 1, process.end(), cmp);
     }
 
     cout << "    AT\tBT\tCT\tTAT\tWT\tRT" << endl;
