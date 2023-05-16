@@ -55,11 +55,6 @@ int main()
         {
             q.push(process[i]);
             i++;
-
-            if (i == n)
-            {
-                process.clear();
-            }
         }
 
         cout << x.name << "|  ";
@@ -89,7 +84,8 @@ int main()
             avgresponseTime += x.responseTime;
             avgwaitingTime += x.waitingTime;
 
-            process.push_back(x);
+            int p = stoi(x.name.substr(1)) - 1;
+            process[p] = x;
         }
     }
     cout << endl;
