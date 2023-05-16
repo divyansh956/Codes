@@ -3,14 +3,14 @@ using namespace std;
 int curr = INT_MAX;
 double avgTurnAroundTime = 0, avgwaitingTime = 0, avgresponseTime = 0;
 
-class FSFC
+class FCFS
 {
 public:
     string name;
     int completionTime, arrivalTime, burstTime, turnAroundTime, responseTime, waitingTime;
 };
 
-bool cmp(const FSFC &o1, const FSFC &o2)
+bool cmp(const FCFS &o1, const FCFS &o2)
 {
     return o1.arrivalTime < o2.arrivalTime;
 }
@@ -20,7 +20,7 @@ int main()
     int n;
     cin >> n;
 
-    vector<FSFC> process(n);
+    vector<FCFS> process(n);
 
     for (int i = 0; i < n; i++)
     {
