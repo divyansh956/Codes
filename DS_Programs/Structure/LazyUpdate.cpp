@@ -66,7 +66,7 @@ public:
 		n = _n;
 		seg.resize(n * 4, 0);
 		lazy.resize(n * 4, 0);
-		// build(0, 0, n - 1, v);
+		build(0, 0, n - 1, v);
 		debug(seg);
 		debug(lazy);
 	}
@@ -93,7 +93,7 @@ private:
 			lazy[i * 2 + 1] += lazy[i];
 			lazy[i * 2 + 2] += lazy[i];
 		}
-		seg[i] += (r - l + 1) * lazy[i];
+		seg[i] += lazy[i];
 		lazy[i] = 0;
 	}
 
@@ -101,7 +101,7 @@ private:
 	{
 		if (l == r)
 		{
-			seg[i] = v[l];
+			seg[i] += v[l];
 			lazy[i] = 0;
 			return;
 		}
@@ -147,7 +147,7 @@ void sol()
 	ll n, q;
 	cin >> n >> q;
 
-	vector<ll> v(n, 0);
+	vector<ll> v(n);
 	// for (auto &x : v) cin >> x;
 	SegTree Tree(v, n);
 
@@ -161,7 +161,7 @@ void sol()
 			ll l, r, k;
 			cin >> l >> r >> k;
 
-			Tree.update(l, r, k);
+			Tree.update(l, r - 1, k);
 		}
 		else
 		{
