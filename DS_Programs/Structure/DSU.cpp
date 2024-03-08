@@ -1,3 +1,79 @@
+class DSU {
+private:
+	vector<int> rank, size, par;
+public:
+	DSU(int n) {
+		size.resize(n + 1, 0);
+		par.resize(n + 1, 0);
+		for (int i = 0; i <= n; i++) {
+			par[i] = i;
+			size[i] = 1;
+		}
+	}
+	int parent(int u) {
+		if (u == par[u]) {
+			return u;
+		}
+		return par[u] = parent(par[u]);
+	}
+	void Union(int u, int v) {
+		u = parent(u);
+		v = parent(v);
+		if (u == v) {
+			return;
+		}
+		if (size[u] < size[v]) {
+			par[u] = v;
+			size[v] += size[u];
+		} else {
+			par[v] = u;
+			size[u] += size[v];
+		}
+	}
+};
+
+
+*********************************************************************************************
+
+
+
+
+class DSU {
+private:
+    vector<ll> rank, size, par;
+public:
+    DSU(ll n) {
+        size.resize(n + 1, 0);
+        par.resize(n + 1, 0);
+        for (ll i = 0; i <= n; i++) {
+            par[i] = i;
+            size[i] = 1;
+        }
+    }
+    ll parent(ll u) {
+        if (u == par[u]) {
+            return u;
+        }
+        return par[u] = parent(par[u]);
+    }
+    void Union(ll u, ll v) {
+        u = parent(u);
+        v = parent(v);
+        if (u == v) {
+            return;
+        }
+        if (size[u] < size[v]) {
+            par[u] = v;
+            size[v] += size[u];
+        } else {
+            par[v] = u;
+            size[u] += size[v];
+        }
+    }
+};
+
+*********************************************************************************************************************
+
 #include <bits/stdc++.h>
 using namespace std;
 class DisjointSet {
