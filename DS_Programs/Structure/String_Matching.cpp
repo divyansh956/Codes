@@ -58,3 +58,56 @@ public:
         return (mp.find({hash1, hash2}) == mp.end() ? -1 : mp[{hash1, hash2}]);
     }
 };
+
+#define ll long long
+class Solution {
+public:
+    const int mod = 1e9 + 7;
+    vector<int> stringIndices(vector<string>& words, vector<string>& queries) {
+        ll p1 = 31, p2 = 29;
+        vector<int> ans;
+        ll ind = 0, mn = -1, len = 1e7;
+        map<pair<ll, ll>, pair<ll, ll>> mp;
+        for (auto s : words) {
+            ll m = s.length(), hash1 = 0, hash2 = 0, pow1 = 1, pow2 = 1;
+            if (len > m) {
+                len = m;
+                mn = ind;
+            }
+            for (ll j = m - 1; j >= 0; j--) {
+                hash1 += (pow1 * (s[j] - 'a' + 1)) % mod;
+                hash2 += (pow2 * (s[j] - 'a' + 1)) % mod;
+                pow1 = (pow1 * p1) % mod;
+                pow2 = (pow2 * p2) % mod;
+
+                if (mp.find({hash1, hash2}) == mp.end()) {
+                    mp[{hash1, hash2}] = {m, ind};
+                } else {
+                    auto [sz, index] = mp[{hash1, hash2}];
+                    if (sz > m) {
+                        sz = m;
+                        index = ind;
+                    }
+                    mp[{hash1, hash2}] = {sz, index};
+                }
+            }
+            ind++;
+        }
+
+        for (auto s : queries) {
+            ll m = s.length(), hash1 = 0, hash2 = 0, pow1 = 1, pow2 = 1, res = mn;
+            for (ll j = m - 1; j >= 0; j--) {
+                hash1 += (pow1 * (s[j] - 'a' + 1)) % mod;
+                hash2 += (pow2 * (s[j] - 'a' + 1)) % mod;
+                pow1 = (pow1 * p1) % mod;
+                pow2 = (pow2 * p2) % mod;
+                if (mp.find({hash1, hash2}) != mp.end()) {
+                    auto [sz, index] = mp[{hash1, hash2}];
+                    res = index;
+                }
+            }
+            ans.push_back(res);
+        }
+        return ans;
+    }
+};
