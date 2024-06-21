@@ -1,3 +1,61 @@
+class SegTree {
+public:
+    SegTree(int _n) {
+        n = _n;
+        seg.resize(n * 4, 0);
+        // build(0, 0, n - 1, v);
+    }
+
+    int query(int x, int y) { return query(x, y, 0, 0, n - 1); }
+
+    void update(int ind, int val) { update(ind, val, 0, 0, n - 1); }
+
+private:
+    vector<int> seg;
+    int n;
+
+    void build(int i, int l, int r, const vector<int>& v) {
+        if (l == r) {
+            seg[i] = v[l];
+            return;
+        }
+
+        int mid = (l + r) / 2;
+        build(i * 2 + 1, l, mid, v);
+        build(i * 2 + 2, mid + 1, r, v);
+        seg[i] = seg[i * 2 + 1] + seg[i * 2 + 2];
+    }
+
+    int query(int x, int y, int i, int l, int r) {
+        if (y < l || x > r) {
+            return 0;
+        }
+        if (x <= l && y >= r) {
+            return seg[i];
+        }
+
+        int mid = (l + r) / 2;
+        int left = query(x, y, i * 2 + 1, l, mid);
+        int right = query(x, y, i * 2 + 2, mid + 1, r);
+        return left + right;
+    }
+
+    void update(int ind, int val, int i, int l, int r) {
+        if (l == r) {
+            seg[i] = val;
+            return;
+        }
+
+        int mid = (l + r) / 2;
+        if (ind <= mid) {
+            update(ind, val, i * 2 + 1, l, mid);
+        } else {
+            update(ind, val, i * 2 + 2, mid + 1, r);
+        }
+        seg[i] = seg[i * 2 + 1] + seg[i * 2 + 2];
+    }
+};
+
 struct SegTree {
     
     vector<int> tree;
