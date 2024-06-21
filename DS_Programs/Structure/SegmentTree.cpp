@@ -56,6 +56,7 @@ private:
     }
 };
 
+
 struct SegTree {
     
     vector<int> tree;
